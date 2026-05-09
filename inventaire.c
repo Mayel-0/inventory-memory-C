@@ -78,6 +78,8 @@ void show_inventory(void) {
 }
 
 void modifyWeight_inventory(int nb) {
+    if (empty_check()) return;
+
     nb--;
     if (nb > InventorySize || nb < 0) {
         printf("\nVous navez pas rentré un nombre Valide.");
@@ -93,6 +95,8 @@ void modifyWeight_inventory(int nb) {
 }
 
 void rmLastObject_inventory(void) {
+    if (empty_check()) return;
+
     printf("\nL'object : %s ", Inventory[InventorySize - 1].name);
     printf("vas etre Supprimer voulez vous vraimer faire sa (1 = oui 0 = non) \n");
     int nb = 0;
@@ -112,9 +116,40 @@ void rmLastObject_inventory(void) {
 }
 
 void totalWeight_inventory(void) {
+    if (empty_check()) return;
+
     float totalWeight = 0;
     for (int i = 0; i < InventorySize; i++) {
         totalWeight += Inventory[i].weight;
     }
     printf("\nVoici le point total de votre Inventaire %.1f \n", totalWeight);
+}
+
+void weight_inventory(void) {
+    if (empty_check()) return;
+
+    float maxWeight = Inventory[0].weight;
+    int indexChampion = 0;
+
+    for (int i = 1; i < InventorySize; i++) {
+        if (Inventory[i].weight > maxWeight) {
+            maxWeight = Inventory[i].weight;
+            indexChampion = i;
+        }
+    }
+
+    printf("\nL'objet le plus lourd est : %s", Inventory[indexChampion].name);
+    printf(" avec un poids de %.1f \n", maxWeight);
+}
+
+int empty_check(void) {
+    if (InventorySize == 0) {
+        printf("\n[!] Erreur : L'inventaire est vide !\n");
+        return 1;
+    }
+    if (Inventory == NULL) {
+        printf("\n[!] Erreur : L'inventaire est vide !\n");
+        return 1;
+    }
+    return 0;
 }

@@ -28,43 +28,49 @@ void MenuStart(void) {
                 printf("\nEntre le nombre d'Object que tu veut mettre dans ton inventaire :");
                 scanf("%d", &nb);
                 initialiser_inventory(nb);
-                printf("\nEntre un numero(0-9) pour continuer :");
-                scanf("%d", &nb);
+                printf("\nAppuyez sur Entree pour continuer...");
+                while (getchar() != '\n');
+                getchar();
                 break;
             case 2:
                 addObject_inventory();
-                printf("\nEntre un numero(0-9) pour continuer :");
-                scanf("%d", &nb);
+                printf("\nAppuyez sur Entree pour continuer...");
+                while (getchar() != '\n');
+                getchar();
                 break;
-
             case 3:
                 show_inventory();
-                printf("\nEntre un numero(0-9) pour continuer :");
-                scanf("%d", &nb);
+                printf("\nAppuyez sur Entree pour continuer...");
+                while (getchar() != '\n');
+                getchar();
                 break;
-
             case 4:
                 show_inventory();
                 printf("\nEntre le Numero de l'Emplacement de l'object a modifier :");
                 scanf("%d", &nb);
                 modifyWeight_inventory(nb);
-                printf("\nEntre un numero(0-9) pour continuer :");
-                scanf("%d", &nb);
+                printf("\nAppuyez sur Entree pour continuer...");
+                while (getchar() != '\n');
+                getchar();
                 break;
             case 5:
                 rmLastObject_inventory();
-                printf("\nEntre un numero(0-9) pour continuer :");
-                scanf("%d", &nb);
+                printf("\nAppuyez sur Entree pour continuer...");
+                while (getchar() != '\n');
+                getchar();
                 break;
             case 6:
                 totalWeight_inventory();
-                printf("\nEntre un numero(0-9) pour continuer :");
-                scanf("%d", &nb);
+                printf("\nAppuyez sur Entree pour continuer...");
+                while (getchar() != '\n');
+                getchar();
                 break;
             case 7:
-
+                weight_inventory();
+                printf("\nAppuyez sur Entree pour continuer...");
+                while (getchar() != '\n');
+                getchar();
                 break;
-
             case 8:
                 return;
             default:
