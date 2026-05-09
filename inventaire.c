@@ -19,8 +19,10 @@ int InventorySize = 0;
 
 void initialiser_inventory(void) {
     printf("initialiser inventaire :\n");
+    if (Inventory != NULL) {
+        free(Inventory);
+    }
     Inventory = NULL;
-    free(Inventory);
     InventorySize = 0;
 
     for (int i = 0; i < 3; i++) {
@@ -43,17 +45,7 @@ void initialiser_inventory(void) {
 
         Inventory[i] = obj;
     }
-
-    printf("\n ===== INVENTAIRE DE L'AVENTURIER ===== \n");
-    printf("Nombre d'objets %d : \n\n", InventorySize);
-    for (int y = 0; y < InventorySize; y++) {
-        Object obj = Inventory[y];
-        printf("Emplacement %d : %s = ", y, obj.name);
-        printf("%.1f \n", obj.weight);
-    }
-    printf("\nEntre un numero(0-9) pour continuer :");
-    int finish;
-    scanf("%d", &finish);
+    show_inventory();
 }
 
 void addObject_inventory(void) {
@@ -74,22 +66,29 @@ void addObject_inventory(void) {
     scanf("%f", &obj.weight);
 
     Inventory[InventorySize - 1] = obj;
-
-    printf("\nEntre un numero(0-9) pour continuer :");
-    int finish;
-    scanf("%d", &finish);
 }
 
-void show_invenotry(void) {
+void show_inventory(void) {
     printf("\n ===== INVENTAIRE DE L'AVENTURIER ===== \n");
     printf("Nombre d'objets %d : \n\n", InventorySize);
-    for (int y = 0; y < InventorySize; y++) {
-        Object obj = Inventory[y];
-        printf("Emplacement %d : %s = ", y, obj.name);
-        printf("%.1f \n", obj.weight);
-    }
 
-    printf("\nEntre un numero(0-9) pour continuer :");
-    int finish;
-    scanf("%d", &finish);
+    for (int y = 0; y < InventorySize; y++) {
+        printf("Emplacement %d : %s = ", y + 1, Inventory[y].name);
+        printf("%.1f \n", Inventory[y].weight);
+    }
+}
+
+void modifyWeight_inventory(int nb) {
+    nb = nb - 1;
+    if (nb > InventorySize || nb < 0) {
+        printf("\nVous navez pas rentré un nombre Valide.");
+        return;
+    }
+    printf("Voici l'object selectionner : \n\n");
+    printf("Name :%s \n", Inventory[nb].name);
+    printf("poids (avant modification) :%.1f \n\n", Inventory[nb].weight);
+    printf("changer sont poids :");
+    scanf("%f", &Inventory[nb].weight);
+
+    printf("Modification effectuer !\n");
 }

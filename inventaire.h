@@ -10,4 +10,5 @@
 
 void initialiser_inventory(void);
 void addObject_inventory(void);
-void show_invenotry(void);
+void show_inventory(void);
+void modifyWeight_inventory(int nb);
