@@ -56,7 +56,7 @@ void initialiser_inventory(void) {
     scanf("%d", &finish);
 }
 
-void addObject_inventory() {
+void addObject_inventory(void) {
     Object obj;
     InventorySize++;
     Object *temp = realloc(Inventory, InventorySize * sizeof(Object));
@@ -75,6 +75,12 @@ void addObject_inventory() {
 
     Inventory[InventorySize - 1] = obj;
 
+    printf("\nEntre un numero(0-9) pour continuer :");
+    int finish;
+    scanf("%d", &finish);
+}
+
+void show_invenotry(void) {
     printf("\n ===== INVENTAIRE DE L'AVENTURIER ===== \n");
     printf("Nombre d'objets %d : \n\n", InventorySize);
     for (int y = 0; y < InventorySize; y++) {

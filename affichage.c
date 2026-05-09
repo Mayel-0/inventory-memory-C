@@ -31,7 +31,7 @@ void MenuStart(void) {
                 break;
 
             case 3:
-
+                show_invenotry();
                 break;
 
             case 4:
@@ -51,8 +51,7 @@ void MenuStart(void) {
                 break;
 
             case 8:
-
-                break;
+                return;
             default:
                 printf("choisisez un nombre entre 1 et 8.");
                 break;

@@ -9,4 +9,5 @@
 
 
 void initialiser_inventory(void);
-void addObject_inventory();
+void addObject_inventory(void);
+void show_invenotry(void);
