@@ -18,29 +18,27 @@ int InventorySize = 0;
 
 
 void initialiser_inventory(int nb) {
-    InventorySize = nb;
-    printf("initialiser inventaire :\n");
+    if (nb <= 0) return;
+
     if (Inventory != NULL) {
         free(Inventory);
+        Inventory = NULL;
     }
-    Inventory = NULL;
+
+    InventorySize = nb;
+    changeBySizeInventory();
+    if (Inventory == NULL) return;
 
     for (int i = 0; i < nb; i++) {
         Object obj;
+
         printf("Donne le nom de l'object %d a ajouter dans ton inventaire :\n", i + 1);
         scanf("%s", obj.name);
         printf("Donne le poids de l'object %d a ajouter dans ton inventaire :\n", i + 1);
-        scanf("%f", &obj.weight);
+        obj.weight = askWeight();
 
         printf("\nVoici ton object Name : %s \n", obj.name);
         printf("Voici ton object Poids : %.1f \n\n", obj.weight);
-
-        Object *temp = realloc(Inventory, InventorySize * sizeof(Object));
-        if (temp == NULL) {
-            printf("Erreur de mémoire !\n");
-            return;
-        }
-        Inventory = temp;
 
         Inventory[i] = obj;
     }
@@ -50,30 +48,33 @@ void initialiser_inventory(int nb) {
 void addObject_inventory(void) {
     Object obj;
     InventorySize++;
-    Object *temp = realloc(Inventory, InventorySize * sizeof(Object));
-    if (temp == NULL) {
-        printf("Erreur de mémoire !\n");
-        return;
-    }
-    Inventory = temp;
+    changeBySizeInventory();
+    if (Inventory == NULL) return;
 
     printf("\n Object a Ajouter :\n");
     printf("Quelle est le nom de l'object :\n");
     scanf("%s", obj.name);
 
     printf("Quelle est le poids de l'object :\n");
-    scanf("%f", &obj.weight);
+    obj.weight = askWeight();
 
     Inventory[InventorySize - 1] = obj;
 }
 
 void show_inventory(void) {
+    if (empty_check()) return;
     printf("\n ===== INVENTAIRE DE L'AVENTURIER ===== \n");
     printf("Nombre d'objets %d : \n\n", InventorySize);
-
-    for (int y = 0; y < InventorySize; y++) {
-        printf("Emplacement %d : %s = ", y + 1, Inventory[y].name);
-        printf("%.1f \n", Inventory[y].weight);
+    float total = 0;
+    for (int i = 0; i < InventorySize; i++) {
+        printf("Emplacement %d : %s = ", i + 1, Inventory[i].name);
+        printf("%.1f \n", Inventory[i].weight);
+        total += Inventory[i].weight;
+    }
+    if (Inventory > 0) {
+        printf("\nPoids Total %.1f \n",total);
+        total = total / InventorySize;
+        printf("Moyenne Poids %.1f \n",total);
     }
 }
 
@@ -88,8 +89,7 @@ void modifyWeight_inventory(int nb) {
     printf("Voici l'object selectionner : \n\n");
     printf("Name :%s \n", Inventory[nb].name);
     printf("poids (avant modification) :%.1f \n\n", Inventory[nb].weight);
-    printf("changer sont poids :");
-    scanf("%f", &Inventory[nb].weight);
+    Inventory[nb].weight = askWeight();
 
     printf("Modification effectuer !\n");
 }
@@ -103,12 +103,8 @@ void rmLastObject_inventory(void) {
     scanf("%d", &nb);
     if (nb != 0) {
         InventorySize--;
-        Object *tmp = realloc(Inventory, InventorySize * sizeof(Object));
-        if (tmp == NULL) {
-                printf("Erreur de mémoire !\n");
-                return;
-        }
-        Inventory = tmp;
+        changeBySizeInventory();
+        if (Inventory == NULL) return;
         printf("Objet supprime avec succes.\n");
     } else {
         printf("Suppression annulee.\n");
@@ -152,4 +148,45 @@ int empty_check(void) {
         return 1;
     }
     return 0;
+}
+
+float askWeight(void) {
+    float w;
+    do {
+        printf("Poids (kg) : ");
+        if (scanf("%f", &w) != 1) {
+            printf("[!] Erreur : Veuillez entrer un nombre valide.\n");
+            while (getchar() != '\n');
+            w = -1;
+            continue;
+        }
+        if (w < 0) {
+            printf("[!] Erreur : Le poids ne peut pas etre negatif.\n");
+        }
+    } while (w < 0);
+    return w;
+}
+
+void clear_inventory(void) {
+    if (empty_check()) return;
+    printf("Voulez vous Vider (supprimer) votre inventaire (1 = oui 0 = non) \n");
+    int nb = 0;
+    scanf("%d", &nb);
+    if (nb != 0) {
+        free(Inventory);
+        Inventory = NULL;
+        InventorySize = 0;
+        printf("\nL'inventaire a ete integralement vide.");
+    } else {
+        printf("\nAction annulee.");
+    }
+}
+
+void changeBySizeInventory(void) {
+    Object *temp = realloc(Inventory, InventorySize * sizeof(Object));
+    if (temp == NULL) {
+        printf("Erreur de mémoire !\n");
+        return;
+    }
+    Inventory = temp;
 }

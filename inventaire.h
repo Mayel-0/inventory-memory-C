@@ -16,3 +16,6 @@ void rmLastObject_inventory(void);
 void totalWeight_inventory(void);
 void weight_inventory(void);
 int empty_check(void);
+void clear_inventory(void);
+float askWeight(void);
+void changeBySizeInventory(void);

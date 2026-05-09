@@ -9,3 +9,4 @@
 
 
 void MenuStart(void);
+void finish(void);
