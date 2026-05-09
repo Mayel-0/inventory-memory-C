@@ -8,4 +8,5 @@
 #endif //INVENTORY_INVENTAIRE_H
 
 
-void initialiser_inventaire(void);
+void initialiser_inventory(void);
+void addObject_inventory();

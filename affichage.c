@@ -3,15 +3,15 @@
 //
 
 #include "affichage.h"
-
 #include <stdio.h>
-
 #include "inventaire.h"
+#include <stdlib.h>
+
 
 void MenuStart(void) {
     int user = 0;
     while (user != 8) {
-        printf("===== INVENTAIRE DE L'AVENTURIER ===== \n");
+        printf("\n===== INVENTAIRE DE L'AVENTURIER ===== \n");
         printf("1. Initialiser l'inventaire \n");
         printf("2. Ajouter un objet \n");
         printf("3. Aﬃcher l'inventaire \n");
@@ -22,12 +22,40 @@ void MenuStart(void) {
         printf("8. Quitter\n \n");
         printf("Votre choix : \n");
         scanf("%d", &user);
-        if (user < 1 || user > 8) {
-            printf("choisisez un nombre entre 1 et 8.");
-        }
+        switch (user) {
+            case 1:
+                initialiser_inventory();
+                break;
+            case 2:
+                addObject_inventory();
+                break;
 
-        if (user == 1) {
-            initialiser_inventaire();
+            case 3:
+
+                break;
+
+            case 4:
+
+                break;
+
+            case 5:
+
+                break;
+
+            case 6:
+
+                break;
+
+            case 7:
+
+                break;
+
+            case 8:
+
+                break;
+            default:
+                printf("choisisez un nombre entre 1 et 8.");
+                break;
         }
     }
 }
