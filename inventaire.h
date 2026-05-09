@@ -8,7 +8,8 @@
 #endif //INVENTORY_INVENTAIRE_H
 
 
-void initialiser_inventory(void);
+void initialiser_inventory(int nb);
 void addObject_inventory(void);
 void show_inventory(void);
 void modifyWeight_inventory(int nb);
+void rmLastObject_inventory(void);

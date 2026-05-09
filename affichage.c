@@ -7,7 +7,7 @@
 #include "inventaire.h"
 #include <stdlib.h>
 
-int finish;
+int nb;
 
 void MenuStart(void) {
     int user = 0;
@@ -25,34 +25,37 @@ void MenuStart(void) {
         scanf("%d", &user);
         switch (user) {
             case 1:
-                initialiser_inventory();
+                printf("\nEntre le nombre d'Object que tu veut mettre dans ton inventaire :");
+                scanf("%d", &nb);
+                initialiser_inventory(nb);
                 printf("\nEntre un numero(0-9) pour continuer :");
-                scanf("%d", &finish);
+                scanf("%d", &nb);
                 break;
             case 2:
                 addObject_inventory();
                 printf("\nEntre un numero(0-9) pour continuer :");
-                scanf("%d", &finish);
+                scanf("%d", &nb);
                 break;
 
             case 3:
                 show_inventory();
                 printf("\nEntre un numero(0-9) pour continuer :");
-                scanf("%d", &finish);
+                scanf("%d", &nb);
                 break;
 
             case 4:
                 show_inventory();
                 printf("\nEntre le Numero de l'Emplacement de l'object a modifier :");
-                scanf("%d", &finish);
-                modifyWeight_inventory(finish);
+                scanf("%d", &nb);
+                modifyWeight_inventory(nb);
                 printf("\nEntre un numero(0-9) pour continuer :");
-                scanf("%d", &finish);
+                scanf("%d", &nb);
                 break;
             case 5:
-
+                rmLastObject_inventory();
+                printf("\nEntre un numero(0-9) pour continuer :");
+                scanf("%d", &nb);
                 break;
-
             case 6:
 
                 break;

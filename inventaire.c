@@ -17,24 +17,23 @@ Object *Inventory = NULL;
 int InventorySize = 0;
 
 
-void initialiser_inventory(void) {
+void initialiser_inventory(int nb) {
+    InventorySize = nb;
     printf("initialiser inventaire :\n");
     if (Inventory != NULL) {
         free(Inventory);
     }
     Inventory = NULL;
-    InventorySize = 0;
 
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < nb; i++) {
         Object obj;
-        printf("Donne le nom de l'object %d a ajouter dans ton inventaire :\n", i);
+        printf("Donne le nom de l'object %d a ajouter dans ton inventaire :\n", i + 1);
         scanf("%s", obj.name);
-        printf("Donne le poids de l'object %d a ajouter dans ton inventaire :\n", i);
+        printf("Donne le poids de l'object %d a ajouter dans ton inventaire :\n", i + 1);
         scanf("%f", &obj.weight);
 
         printf("\nVoici ton object Name : %s \n", obj.name);
         printf("Voici ton object Poids : %.1f \n\n", obj.weight);
-        InventorySize++;
 
         Object *temp = realloc(Inventory, InventorySize * sizeof(Object));
         if (temp == NULL) {
@@ -79,7 +78,7 @@ void show_inventory(void) {
 }
 
 void modifyWeight_inventory(int nb) {
-    nb = nb - 1;
+    nb--;
     if (nb > InventorySize || nb < 0) {
         printf("\nVous navez pas rentré un nombre Valide.");
         return;
@@ -91,4 +90,23 @@ void modifyWeight_inventory(int nb) {
     scanf("%f", &Inventory[nb].weight);
 
     printf("Modification effectuer !\n");
+}
+
+void rmLastObject_inventory(void) {
+    printf("\nL'object : %s ", Inventory[InventorySize - 1].name);
+    printf("vas etre Supprimer voulez vous vraimer faire sa (1 = oui 0 = non) \n");
+    int nb = 0;
+    scanf("%d", &nb);
+    if (nb != 0) {
+        InventorySize--;
+        Object *tmp = realloc(Inventory, InventorySize * sizeof(Object));
+        if (tmp == NULL) {
+                printf("Erreur de mémoire !\n");
+                return;
+        }
+        Inventory = tmp;
+        printf("Objet supprime avec succes.\n");
+    } else {
+        printf("Suppression annulee.\n");
+    }
 }
