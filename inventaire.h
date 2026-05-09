@@ -13,3 +13,4 @@ void addObject_inventory(void);
 void show_inventory(void);
 void modifyWeight_inventory(int nb);
 void rmLastObject_inventory(void);
+void totalWeight_inventory(void);

@@ -57,9 +57,10 @@ void MenuStart(void) {
                 scanf("%d", &nb);
                 break;
             case 6:
-
+                totalWeight_inventory();
+                printf("\nEntre un numero(0-9) pour continuer :");
+                scanf("%d", &nb);
                 break;
-
             case 7:
 
                 break;

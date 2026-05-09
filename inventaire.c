@@ -110,3 +110,11 @@ void rmLastObject_inventory(void) {
         printf("Suppression annulee.\n");
     }
 }
+
+void totalWeight_inventory(void) {
+    float totalWeight = 0;
+    for (int i = 0; i < InventorySize; i++) {
+        totalWeight += Inventory[i].weight;
+    }
+    printf("\nVoici le point total de votre Inventaire %.1f \n", totalWeight);
+}
